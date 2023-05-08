@@ -28,7 +28,7 @@
 
 
     // SLIDER
-    let slider_value = 0;
+    $: slider_value = 0;
 </script>
 
 
@@ -44,16 +44,17 @@
 <h1>Petar Benjak - KU Leuven - r0924552</h1>
 <h2>Details for car {car_id}</h2>
 
-<input type="range" min="0" max="1440" bind:value={slider_value} style="width: 300px"/><br/>
+<input type="range" min="0" max="20159" bind:value={slider_value} style="width: 300px"/><br/>
 
 <!-- GPS DATA -->
 <svg width={width} height={height}>
     {#each gpsTracking as point}
-       <circle cx={xScale(point.long)} cy={yScale(point.lat)} r="3"/>
+       <circle cx={xScale(point.long)} cy={yScale(point.lat)} r="3"
+               class:window="{Math.abs((point.day-6)*24*60 + point.hour*60 + point.minute - slider_value) <= 15}"/>
     {/each}
 </svg>
 
-<CarBar data={data}></CarBar>
+<CarBar stops={stops} slider_value={slider_value}></CarBar>
 
 {:else}
     Loading data...
@@ -64,5 +65,10 @@
     circle {
         fill: skyblue;
         opacity: 0.5;
+    }
+
+    circle.window {
+        fill: red;
+        opacity: 1;
     }
 </style>
