@@ -31,8 +31,6 @@
 
 </script>
 
-
-<h1>Petar Benjak - KU Leuven - r0924552</h1>
 <h2>Overview</h2>
 
 <!-- DROPDOWN -->
